@@ -63,7 +63,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\SongDetail.cs" />
     <Compile Include="Util\FileUtil.cs" />
+    <Compile Include="Util\RenameUtil.cs" />
     <Compile Include="Util\SongListViewUtil.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

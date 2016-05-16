@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RenameMp3.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,29 +10,7 @@ namespace RenameMp3.Util
 {
     class SongListViewUtil
     {
-        public struct SongDetail
-        {
-            public string Album { get; set; }
-            public string Artist { get; set; }
-            public string Title { get; set; }
-            public string TrackNum { get; set; }
-            public string FileName { get; set; }
-            public string Rename { get; set; }
-            public string ContainningFolderPath { get; set; }
-        }
-
-        private ListView _songListView;
-        public ListView SongListView
-        {
-            get
-            {
-                return _songListView;
-            }
-            set
-            {
-                _songListView = value;
-            }
-        }
+        public ListView SongListView { get; set; }
 
         public SongListViewUtil()
         {
@@ -80,6 +59,14 @@ namespace RenameMp3.Util
                     }
                 }
                 return true;
+            }
+        }
+
+        public void RemoveDetailFromList(List<SongDetail> songDetails)
+        {
+            foreach(SongDetail songDetail in songDetails)
+            {
+                SongListView.Items.Remove(songDetail);
             }
         }
     }

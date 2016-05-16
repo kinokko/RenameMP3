@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using RenameMp3.Model;
 using RenameMp3.Util;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ namespace RenameMp3
     {
         private FileUtil _fileUtil;
         private SongListViewUtil _songListViewUtil;
+        private RenameUtil _renameUtil;
         public MainWindow()
         {
             initialization();
@@ -32,8 +34,11 @@ namespace RenameMp3
         private void fileDialogButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
-            List<string> songPaths = _fileUtil.ChooseFiles(fileDialog);
-            _songListViewUtil.AddSongsToListView(songPaths);
+            bool result = _fileUtil.ChooseFiles(fileDialog);
+            if (result == true)
+            {
+                _songListViewUtil.AddSongsToListView(_fileUtil.FilePaths);
+            }
         }
 
         private void initialization()
@@ -41,6 +46,18 @@ namespace RenameMp3
             InitializeComponent();
             _fileUtil = new FileUtil();
             _songListViewUtil = new SongListViewUtil(songListView);
+            _renameUtil = new RenameUtil();
+        }
+
+        private void defaultRuleButton_Click(object sender, RoutedEventArgs e)
+        {
+            _renameUtil.SetDefaultRenameRule(ruleTextBox);
+        }
+
+        private void actionButton_Click(object sender, RoutedEventArgs e)
+        {
+            List<SongDetail> succeedSongDetailList = _renameUtil.RenameAction(_songListViewUtil.SongListView.Items, ruleTextBox.Text);
+            _songListViewUtil.RemoveDetailFromList(succeedSongDetailList);
         }
     }
 }

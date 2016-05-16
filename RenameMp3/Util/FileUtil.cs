@@ -9,8 +9,7 @@ namespace RenameMp3.Util
 {
     class FileUtil
     {
-        private string _filePaths;
-        public string FilePaths { get; set; }
+        public List<string> FilePaths { get; set; }
 
         public FileUtil()
         {
@@ -20,8 +19,8 @@ namespace RenameMp3.Util
         /// <summary>
         /// Open dialog to choose mp3 files
         /// </summary>
-        /// <returns>The list of paths for selected files</returns>
-        public List<string> ChooseFiles(OpenFileDialog fileDialog)
+        /// <returns>True if file(s) is(are) chose</returns>
+        public bool ChooseFiles(OpenFileDialog fileDialog)
         {
             fileDialog.Filter = "MP3 (*.mp3) | *.mp3";
             fileDialog.DefaultExt = ".mp3";
@@ -35,13 +34,12 @@ namespace RenameMp3.Util
 
             Nullable<bool> dialogResult = fileDialog.ShowDialog();
 
-            // Choose file only when  the dialog is shown successfully
             if (dialogResult == true)
             {
-                List<string> filePaths = fileDialog.FileNames.ToList();
-                return filePaths;
+                FilePaths = fileDialog.FileNames.ToList();
+                return true;
             }
-            return null;
+            return false;
         }
     }
 }
