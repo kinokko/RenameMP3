@@ -19,11 +19,17 @@
         <ListView x:Name="songListView" Margin="10,0,10,10" Grid.Row="1" Grid.ColumnSpan="2">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="Album" DisplayMemberBinding = "{Binding Album}"/>
+                    <GridViewColumn Header="Artist" DisplayMemberBinding = "{Binding Artist}"/>
+                    <GridViewColumn Header="Title" DisplayMemberBinding = "{Binding Title}"/>
+                    <GridViewColumn Header="Track Number" DisplayMemberBinding = "{Binding TrackNum}"/>
+                    <GridViewColumn Header="Current File Name" DisplayMemberBinding = "{Binding FileName}"/>
+                    <GridViewColumn Header="New File Name" DisplayMemberBinding = "{Binding Rename}"/>
+                    <GridViewColumn Header="Containning Folder" DisplayMemberBinding = "{Binding ContainningFolderPath}" Width="0"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="fileDialogButton" Content="Open" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Height="20"/>
+        <Button x:Name="fileDialogButton" Content="Open" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Height="20" Click="fileDialogButton_Click"/>
         <Button x:Name="defaultRuleButton" Content="Set default" HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" Width="75" Height="20"/>
         <Button x:Name="previewButton" Content="Preview" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="75" Height="20"/>
         <Button x:Name="actionButton" Content="Start" HorizontalAlignment="Left" Margin="90,40,0,0" VerticalAlignment="Top" Width="75" Height="20"/>
