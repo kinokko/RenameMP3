@@ -61,6 +61,7 @@ namespace RenameMp3.Util
                 return true;
             }
         }
+        
 
         public void RemoveDetailFromList(List<SongDetail> songDetails)
         {

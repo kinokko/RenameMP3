@@ -25,13 +25,13 @@
                     <GridViewColumn Header="Track Number" DisplayMemberBinding = "{Binding TrackNum}"/>
                     <GridViewColumn Header="Current File Name" DisplayMemberBinding = "{Binding FileName}"/>
                     <GridViewColumn Header="New File Name" DisplayMemberBinding = "{Binding NewName}"/>
-                    <GridViewColumn Header="Containning Folder" DisplayMemberBinding = "{Binding ContainningFolderPath}" Width="0"/>
+                    <GridViewColumn Header="Containning Folder" DisplayMemberBinding = "{Binding ContainningFolderPath}"/>
                 </GridView>
             </ListView.View>
         </ListView>
         <Button x:Name="fileDialogButton" Content="Open" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Height="20" Click="fileDialogButton_Click"/>
         <Button x:Name="defaultRuleButton" Content="Set default" HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" Width="75" Height="20" Click="defaultRuleButton_Click"/>
-        <Button x:Name="previewButton" Content="Preview" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="75" Height="20"/>
+        <Button x:Name="previewButton" Content="Preview" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="75" Height="20" Click="previewButton_Click"/>
         <Button x:Name="actionButton" Content="Start" HorizontalAlignment="Left" Margin="90,40,0,0" VerticalAlignment="Top" Width="75" Height="20" Click="actionButton_Click"/>
         <TextBox x:Name="ruleTextBox" Grid.Column="1" Height="20" Margin="0,10,10,0" TextWrapping="Wrap" Text="Rename format" VerticalAlignment="Top"/>
         <ProgressBar x:Name="renameProgressBar" Grid.Column="1" Height="20" Margin="0,40,10,0" VerticalAlignment="Top"/>

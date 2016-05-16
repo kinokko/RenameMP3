@@ -58,6 +58,16 @@ namespace RenameMp3
         {
             List<SongDetail> succeedSongDetailList = _renameUtil.RenameAction(_songListViewUtil.SongListView.Items, ruleTextBox.Text);
             _songListViewUtil.RemoveDetailFromList(succeedSongDetailList);
+            _songListViewUtil.SongListView.Items.Refresh();
+        }
+
+        private void previewButton_Click(object sender, RoutedEventArgs e)
+        {
+            foreach(SongDetail songDetail in _songListViewUtil.SongListView.Items)
+            {
+                songDetail.NewName = _renameUtil.GenerateNewName(songDetail, ruleTextBox.Text);
+            }
+            _songListViewUtil.SongListView.Items.Refresh();
         }
     }
 }

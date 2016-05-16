@@ -34,7 +34,7 @@ namespace RenameMp3.Util
             foreach(SongDetail songDetail in songDetails)
             {
                 // Todo: generate newName with reflection
-                songDetail.NewName = songDetail.Artist + " - " + songDetail.Title + ".mp3";
+                songDetail.NewName = GenerateNewName(songDetail, rule);
                 bool result = rename(songDetail);
                 if (result == true)
                 {
@@ -43,6 +43,11 @@ namespace RenameMp3.Util
             }
 
             return succeedSongDetailList;
+        }
+
+        public string GenerateNewName(SongDetail songDetail, string rule)
+        {
+            return songDetail.Artist + " - " + songDetail.Title + ".mp3";
         }
 
         /// <summary>
@@ -60,11 +65,13 @@ namespace RenameMp3.Util
                 return true;
             }
 
-            if (!File.Exists(oldPath) || File.Exists(newPath) || newPath.IndexOfAny(Path.GetInvalidPathChars()) >= 0)
+            if (!File.Exists(oldPath) || File.Exists(newPath) 
+                || newPath.IndexOfAny(Path.GetInvalidPathChars()) >= 0
+                || songDetail.NewName.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0)
             {
                 return false;
             }
-            File.Move(getOldPath(songDetail), getNewPath(songDetail));
+            File.Move(oldPath, newPath);
             return true;
         }
 
