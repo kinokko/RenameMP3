@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using RenameMp3.Util;
 using RenameMp3.Model;
 using System.IO;
+using System.Reflection;
 
 namespace RenameMp3.Util
 {
@@ -47,7 +48,31 @@ namespace RenameMp3.Util
 
         public string GenerateNewName(SongDetail songDetail, string rule)
         {
-            return songDetail.Artist + " - " + songDetail.Title + ".mp3";
+            string newName = "";
+            int preIndex = -1;
+            bool insideQuote = false;
+            if (!rule.Contains("%"))
+            {
+                newName = rule;
+            }
+            else
+            {
+                for (int index = rule.IndexOf('%'); index > -1; index = rule.IndexOf('%', index + 1))
+                {
+                    if (insideQuote)
+                    {
+                        PropertyInfo property = songDetail.GetType().GetProperty(rule.Substring(preIndex + 1, index - (preIndex + 1)));
+                        newName += property.GetValue(songDetail);
+                    }
+                    else
+                    {
+                        newName += rule.Substring(preIndex + 1, index - (preIndex + 1));
+                    }
+                    preIndex = index;
+                    insideQuote = !insideQuote;
+                }
+            }
+            return  newName + ".mp3";
         }
 
         /// <summary>
@@ -84,5 +109,7 @@ namespace RenameMp3.Util
         {
             return songDetail.ContainningFolderPath + "\\" + songDetail.NewName;
         }
+
+        
     }
 }
